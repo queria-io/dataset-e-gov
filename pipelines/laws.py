@@ -31,21 +31,24 @@ LIMIT = 100_000
 WORKERS = 4
 
 
-# 混み合うと法令 API が 200 で空の本文を返すことがある。間隔を延ばして取り直す
-EMPTY_RETRIES = 4
-EMPTY_BACKOFF = 5.0
+# 混み合うと法令 API が 200 で JSON でない本文 (空や HTML) を返すことがある。間隔を延ばして取り直す
+RETRIES = 4
+BACKOFF = 5.0
 
 
 def get_json(path: str) -> dict:
-    for attempt in range(EMPTY_RETRIES + 1):
+    for attempt in range(RETRIES + 1):
         body = fetch(f"{API}{path}", user_agent=USER_AGENT)
-        if body.strip():
+        try:
             return json.loads(body)
-        if attempt < EMPTY_RETRIES:
-            wait = EMPTY_BACKOFF * 2**attempt
-            logger.warning("retry in %.0fs: %s (empty body)", wait, path)
+        except json.JSONDecodeError:
+            snippet = body[:200].decode("utf-8", "replace")
+            if attempt == RETRIES:
+                raise SystemExit(f"法令 API が JSON を返さない: {path}: {snippet!r}") from None
+            wait = BACKOFF * 2**attempt
+            logger.warning("retry in %.0fs: %s (not JSON: %r)", wait, path, snippet)
             time.sleep(wait)
-    raise SystemExit(f"法令 API が空の本文を返した: {path}")
+    raise AssertionError("unreachable")
 
 
 def download_laws() -> list[str]:
