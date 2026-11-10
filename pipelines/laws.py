@@ -13,6 +13,7 @@ https://laws.e-gov.go.jp/api/2/swagger-ui
 
 import json
 import logging
+import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -30,8 +31,21 @@ LIMIT = 100_000
 WORKERS = 4
 
 
+# 混み合うと法令 API が 200 で空の本文を返すことがある。間隔を延ばして取り直す
+EMPTY_RETRIES = 4
+EMPTY_BACKOFF = 5.0
+
+
 def get_json(path: str) -> dict:
-    return json.loads(fetch(f"{API}{path}", user_agent=USER_AGENT))
+    for attempt in range(EMPTY_RETRIES + 1):
+        body = fetch(f"{API}{path}", user_agent=USER_AGENT)
+        if body.strip():
+            return json.loads(body)
+        if attempt < EMPTY_RETRIES:
+            wait = EMPTY_BACKOFF * 2**attempt
+            logger.warning("retry in %.0fs: %s (empty body)", wait, path)
+            time.sleep(wait)
+    raise SystemExit(f"法令 API が空の本文を返した: {path}")
 
 
 def download_laws() -> list[str]:
