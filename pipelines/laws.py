@@ -27,8 +27,8 @@ LAWS = Path("data/laws/laws.json")
 REVISIONS = Path("data/revisions/revisions.jsonl")
 # 法令は 1 万件ほど。limit を全件より大きくして 1 回で取る
 LIMIT = 100_000
-# 履歴は法令ごとに 1 回呼ぶ。配信元に負荷をかけないよう同時に 4 本まで
-WORKERS = 4
+# 履歴は法令ごとに 1 回呼ぶ。同時に 4 本だと GitHub のランナーから混雑の HTML が多く返ったので 2 本にする
+WORKERS = 2
 
 
 # 混み合うと法令 API が 200 で JSON でない本文 (空や HTML) を返すことがある。間隔を延ばして取り直す
