@@ -33,7 +33,7 @@ ORDER BY amendment_enforcement_date;
 SELECT l.law_title, a.article_title, a.caption, a.text
 FROM e_gov.laws.articles AS a
 JOIN e_gov.laws.laws AS l USING (law_revision_id)
-WHERE a.text LIKE '%オープンデータ%';
+WHERE a.text LIKE '%個人情報%';
 ```
 
 ## 出典と利用条件
