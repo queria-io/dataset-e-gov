@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: laws
+    columns:
+      - name: law_id
+        data_tests: [unique, not_null]
+      - name: law_num
+        data_tests: [not_null]
+      - name: law_title
+        data_tests: [not_null]
+  - name: revisions
+    columns:
+      - name: law_revision_id
+        data_tests: [unique, not_null]
+      - name: law_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('laws')
+                field: law_id
+  - name: articles
+    columns:
+      - name: law_revision_id
+        data_tests: [not_null]
+      - name: provision
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [main, suppl]

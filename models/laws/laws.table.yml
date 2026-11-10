@@ -1,0 +1,68 @@
+schema: laws
+name: laws
+title: 法令一覧
+description: |-
+  e-Gov 法令検索に収録されている法令の一覧です。1 行が 1 法令で、廃止・失効した法令も含みます。
+
+  - 憲法・法律・政令・勅令・府省令・規則を収録します。告示・通達・条例は含みません
+  - 法令名・分類・廃止の状態などは、取得した日の時点で施行されている法令履歴の値です
+  - 改正の履歴は laws.revisions、本文は laws.articles にあります。どちらも law_id で結合できます
+primary_key: [law_id]
+sources:
+  - path: https://laws.e-gov.go.jp/api/2/swagger-ui
+fields:
+  - name: law_id
+    title: 法令 ID
+    description: e-Gov 法令検索が法令ごとに付ける 15 桁の ID。改正しても変わらない
+  - name: law_num
+    title: 法令番号
+    description: 例 平成十五年法律第五十七号
+  - name: law_type
+    title: 法令種別
+    description: Constitution（憲法）・Act（法律）・CabinetOrder（政令）・ImperialOrder（勅令）・MinisterialOrdinance（府省令）・Rule（規則）。法律と政令の両方の性格を持つ法令は Act,CabinetOrder のように並ぶ
+  - name: law_num_era
+    title: 法令番号の元号
+    description: Meiji・Taisho・Showa・Heisei・Reiwa
+  - name: law_num_year
+    title: 法令番号の年
+    description: 元号の年
+  - name: law_num_type
+    title: 法令番号の種別
+  - name: law_num_num
+    title: 法令番号の番号
+  - name: promulgation_date
+    title: 公布日
+  - name: law_title
+    title: 法令名
+  - name: law_title_kana
+    title: 法令名の読み
+  - name: abbrev
+    title: 略称
+    description: 複数あるときはカンマで区切って並ぶ
+  - name: category
+    title: 分類
+    description: e-Gov 法令検索の事項別分類（憲法・刑事・国税・厚生 など 50 分類）
+  - name: law_revision_id
+    title: 法令履歴 ID
+    description: 取得した日の時点で施行されている法令履歴。laws.revisions と結合できる
+  - name: amendment_enforcement_date
+    title: 施行日
+    description: law_revision_id の法令履歴が施行された日
+  - name: amendment_law_id
+    title: 改正法令の法令 ID
+    description: law_revision_id の法令履歴を作った改正法令。新規制定のときは NULL
+  - name: amendment_law_num
+    title: 改正法令の法令番号
+  - name: amendment_law_title
+    title: 改正法令名
+  - name: repeal_status
+    title: 廃止の状態
+    description: None（廃止されていない）・Repeal（廃止）・Expire（失効）・LossOfEffectiveness（実効性喪失）
+  - name: repeal_date
+    title: 廃止日
+  - name: current_revision_status
+    title: 法令履歴の状態
+    description: CurrentEnforced（現行）・UnEnforced（未施行）・PreviousEnforced（過去の履歴）・Repeal（廃止）
+  - name: updated_at
+    title: 更新日時
+    description: e-Gov 法令検索でこの法令履歴のデータを更新した日時

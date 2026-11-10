@@ -1,0 +1,52 @@
+# この dataset.yml は fdl commit が読む（FDL の dataset.json を YAML で書いたもの）。
+# 表の説明は models/ の *.table.yml に書く。表と列の型・NULL・行数は fdl commit がカタログから埋める。
+name: e_gov
+title: e-Gov
+description: |-
+  デジタル庁が e-Gov で公開するデータです。今は e-Gov 法令検索の法令データを収録しています。
+
+  法令（laws）は、憲法・法律・政令・勅令・府省令・規則の一覧（laws.laws）、法令ごとの改正の履歴（laws.revisions）、本文を条ごとに分けたテーブル（laws.articles）です。廃止・失効した法令と、施行日が来ていない改正も含みます。法令 ID と法令履歴 ID で 3 つのテーブルを結合できます。毎週、法令 API と XML 一括ダウンロードから最新のデータを取得します。
+
+  出典：e-Gov 法令検索（デジタル庁）（https://laws.e-gov.go.jp/）を加工して作成
+keywords:
+  - 法令
+  - 法律
+  - 政令
+  - 省令
+  - 条文
+  - 改正
+  - 改正履歴
+  - 施行日
+  - e-Gov
+  - e-Gov法令検索
+  - デジタル庁
+homepage: https://github.com/queria-io/dataset-e-gov
+language: ja
+
+licenses:
+  - JP-PDL-1.0
+
+sources:
+  - title: e-Gov 法令 API Version 2
+    path: https://laws.e-gov.go.jp/api/2/swagger-ui
+  - title: e-Gov 法令検索 XML 一括ダウンロード
+    path: https://laws.e-gov.go.jp/bulkdownload/
+  - title: e-Gov 法令検索 利用規約
+    path: https://laws.e-gov.go.jp/terms/
+
+contributors:
+  - title: デジタル庁
+    path: https://www.digital.go.jp/
+    roles: [rightsHolder]
+
+spatial_coverage: [JP]
+update_frequency: weekly
+
+schemas:
+  - name: laws
+    title: 法令
+
+annotations:
+  queria:
+    themes: [government_finance]
+    cover: ⚖️
