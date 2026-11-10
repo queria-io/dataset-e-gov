@@ -1,0 +1,16 @@
+name: "e_gov"
+version: "1.0.0"
+
+profile: "e_gov"
+
+model-paths: ["models"]
+macro-paths: ["shared/macros"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  e_gov:
+    +database: e_gov
+    +materialized: table

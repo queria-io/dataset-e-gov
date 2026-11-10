@@ -1,0 +1,42 @@
+schema: laws
+name: articles
+title: 法令本文（条）
+description: |-
+  法令の本文を条ごとに分けたテーブルです。1 行が 1 条で、本則と附則の両方を含みます。
+
+  - 現行の法令履歴と、施行日が来ていない改正後の法令履歴の本文を収録します。過去の法令履歴と廃止した法令の本文は含みません
+  - 条の無い本則・附則（短い附則など）は、項をまとめて 1 行にし、article_num を NULL にします
+  - text は項・号ごとに改行し、行頭に項番号（２・３）や号名（一・イ・（１））を付けます。ルビの読みは除きます
+  - 別表・様式は含みません
+  - 現行の本文だけを使うときは laws の law_revision_id と結合します
+primary_key: [law_revision_id, position]
+sources:
+  - path: https://laws.e-gov.go.jp/bulkdownload/
+fields:
+  - name: law_revision_id
+    title: 法令履歴 ID
+  - name: law_id
+    title: 法令 ID
+  - name: position
+    title: 並び順
+    description: 法令履歴の中で本則・附則を通した条の順番。1 から始まる
+  - name: provision
+    title: 本則・附則
+    description: main（本則）・suppl（附則）
+  - name: amend_law_num
+    title: 附則の改正法令番号
+    description: 附則が、どの改正法令で加わったものか。原始附則は NULL
+  - name: headings
+    title: 見出し
+    description: 条の上にある編・章・節・款・目の見出し。例 [第一編　総則, 第一章　通則]
+  - name: article_num
+    title: 条番号
+    description: XML の条番号。第四百七十二条の二 は 472_2
+  - name: article_title
+    title: 条名
+    description: 例 第一条
+  - name: caption
+    title: 条の見出し
+    description: 例 （基本原則）
+  - name: text
+    title: 本文

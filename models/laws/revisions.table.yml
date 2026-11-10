@@ -1,0 +1,64 @@
+schema: laws
+name: revisions
+title: 法令の改正履歴
+description: |-
+  法令ごとの改正の履歴です。1 行が 1 法令履歴で、新規制定・改正・廃止のたびに行ができます。
+
+  - 施行日が来ていない改正（current_revision_status が UnEnforced）も含みます
+  - どの改正法令でいつ改正されたかは amendment_law_id・amendment_law_num と amendment_enforcement_date で判定できます。改正法令の行も laws にあり、law_id で結合できます
+  - 改正の区分は、amendment_type が 1 かつ mission が New なら新規制定、mission が Partial なら一部改正、amendment_type が 8 か repeal_status が None 以外なら廃止です
+primary_key: [law_revision_id]
+sources:
+  - path: https://laws.e-gov.go.jp/api/2/swagger-ui
+fields:
+  - name: law_revision_id
+    title: 法令履歴 ID
+    description: <法令 ID>_<施行日 YYYYMMDD>_<改正法令の法令 ID> の形。新規制定のときは改正法令の部分が 0 になる
+  - name: law_id
+    title: 法令 ID
+  - name: law_type
+    title: 法令種別
+  - name: law_title
+    title: 法令名
+    description: この法令履歴の時点の法令名
+  - name: law_title_kana
+    title: 法令名の読み
+  - name: abbrev
+    title: 略称
+  - name: category
+    title: 分類
+  - name: amendment_promulgate_date
+    title: 改正法令の公布日
+  - name: amendment_enforcement_date
+    title: 施行日
+  - name: amendment_enforcement_comment
+    title: 施行日の備考
+  - name: amendment_scheduled_enforcement_date
+    title: 施行予定日
+  - name: amendment_law_id
+    title: 改正法令の法令 ID
+  - name: amendment_law_num
+    title: 改正法令の法令番号
+  - name: amendment_law_title
+    title: 改正法令名
+  - name: amendment_law_title_kana
+    title: 改正法令名の読み
+  - name: amendment_type
+    title: 改正の種別
+    description: 1（新規制定）・3（被改正）・8（廃止）など。法令 API の amendment_type の値
+  - name: mission
+    title: 改正の区分
+    description: New（新規制定・被改正）・Partial（一部改正）
+  - name: repeal_status
+    title: 廃止の状態
+    description: None・Repeal（廃止）・Expire（失効）・LossOfEffectiveness（実効性喪失）
+  - name: repeal_date
+    title: 廃止日
+  - name: remain_in_force
+    title: 廃止後の効力
+    description: 廃止後もなお効力を有する場合に true
+  - name: current_revision_status
+    title: 法令履歴の状態
+    description: CurrentEnforced（現行）・UnEnforced（未施行）・PreviousEnforced（過去の履歴）・Repeal（廃止）
+  - name: updated_at
+    title: 更新日時
