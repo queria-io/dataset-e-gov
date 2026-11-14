@@ -9,6 +9,7 @@ description: |-
   - text は項・号ごとに改行し、行頭に項番号（２・３）や号名（一・イ・（１））を付けます。ルビの読みは除きます
   - 別表・様式は含みません
   - 現行の本文だけを使うときは laws の law_revision_id と結合します
+  - url で、e-Gov 法令検索のその法令履歴のページをその条の位置で開けます
 primary_key: [law_revision_id, position]
 sources:
   - path: https://laws.e-gov.go.jp/bulkdownload/
@@ -26,6 +27,9 @@ fields:
   - name: amend_law_num
     title: 附則の改正法令番号
     description: 附則が、どの改正法令で加わったものか。原始附則は NULL
+  - name: url
+    title: URL
+    description: e-Gov 法令検索で法令履歴のページを開き、その条の位置へ移る URL。改正附則の条は、e-Gov のページがその附則を表示していないときはページの先頭が開く。附則の改正法令を特定できないときは、ページの先頭を開く URL
   - name: headings
     title: 見出し
     description: 条の上にある編・章・節・款・目の見出し。例 [第一編　総則, 第一章　通則]
