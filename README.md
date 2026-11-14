@@ -14,6 +14,7 @@
 
 - `law_id`（法令 ID）は法令ごとに付く 15 桁の ID で、改正しても変わりません
 - `law_revision_id`（法令履歴 ID）は `<法令 ID>_<施行日>_<改正法令の法令 ID>` の形です
+- `laws.articles.url` は e-Gov 法令検索でその法令履歴のページを開き、その条の位置へ移る URL です
 - 改正法令も 1 つの法令として `laws.laws` にあります。`laws.revisions.amendment_law_id` から結合できます
 
 ## 使い方
