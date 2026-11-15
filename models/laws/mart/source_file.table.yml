@@ -1,0 +1,31 @@
+schema: laws
+name: source_file
+title: 取得したファイル
+description: |-
+  このデータセットを作るときに取得したファイルの一覧です。1 行が 1 つのファイルです。
+
+  - ほかのテーブルの source_sha256 が、この sha256 に当たります
+primary_key: [sha256]
+fields:
+  - name: url
+    title: URL
+    description: 取得した URL
+  - name: page_url
+    title: 掲載ページの URL
+    description: ファイルが掲載されていたページの URL
+  - name: sha256
+    title: SHA-256
+    description: ファイルの SHA-256
+  - name: bytes
+    title: バイト数
+  - name: media_type
+    title: メディアタイプ
+  - name: retrieved_at
+    title: 取得日時
+    description: 取得した日時（UTC）
+  - name: etag
+    title: ETag
+    description: 取得したときの応答の ETag ヘッダー
+  - name: last_modified
+    title: Last-Modified
+    description: 取得したときの応答の Last-Modified ヘッダー

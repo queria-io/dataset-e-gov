@@ -4,6 +4,7 @@ select *
 from read_json(
     'data/articles/articles.jsonl',
     format = 'newline_delimited',
+    filename = true,
     columns = {
         'law_revision_id': 'VARCHAR',
         'provision': 'VARCHAR',
