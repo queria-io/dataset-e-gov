@@ -10,7 +10,7 @@ id (例 Mp-Pa_1-Ch_5-Se_1-At_90) をアンカーで付けたもの。附則の i
 (data/revisions/revisions.jsonl) の改正法令番号に照合して法令 ID を引く。一部改正法は法令一覧に無く、
 法令履歴の改正法令にだけ現れる。どちらにも無い法律・政令は、法令番号から法令 ID を作る。
 
-出力: data/articles/articles.jsonl
+出力: data/articles/articles.jsonl と、取得した all_xml.zip の記録 data/articles/source_file.parquet
 
 データソース: e-Gov 法令検索 XML 一括ダウンロード
 https://laws.e-gov.go.jp/bulkdownload/
@@ -25,7 +25,8 @@ import zipfile
 from collections.abc import Iterator
 from pathlib import Path
 
-from shared.fetch import download, replacing
+from pipelines.source_file import write_source_files
+from shared.fetch import fetch_file, replacing
 
 logger = logging.getLogger("pipelines")
 
@@ -36,6 +37,7 @@ LAWS = Path("data/laws/laws.json")
 REVISIONS = Path("data/revisions/revisions.jsonl")
 OUTPUT = Path("data/articles/articles.jsonl")
 LAW_URL = "https://laws.e-gov.go.jp/law"
+PAGE_URL = "https://laws.e-gov.go.jp/bulkdownload/"
 
 # 編・章・節・款・目。条の見出しの上に並ぶ
 # 値は e-Gov 法令検索のページで要素の id に使う略号
@@ -260,6 +262,7 @@ def write_articles(archive: Path, laws: Path, revisions: Path, output: Path) -> 
 
 def download_articles() -> None:
     ARCHIVE.parent.mkdir(parents=True, exist_ok=True)
-    size = download(URL, ARCHIVE, user_agent=USER_AGENT, timeout=600)
-    logger.info("  all_xml.zip: %d bytes", size)
+    source = fetch_file(URL, ARCHIVE, user_agent=USER_AGENT, timeout=600)
+    logger.info("  all_xml.zip: %d bytes", source["bytes"])
     logger.info("  %d 条", write_articles(ARCHIVE, LAWS, REVISIONS, OUTPUT))
+    write_source_files([{**source, "page_url": PAGE_URL, "paths": [str(OUTPUT)]}], OUTPUT.parent / "source_file.parquet")

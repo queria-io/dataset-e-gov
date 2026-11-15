@@ -11,5 +11,6 @@ select
     article_num,
     article_title,
     caption,
-    text
+    text,
+    filename as source_path
 from {{ ref('raw_articles') }}
