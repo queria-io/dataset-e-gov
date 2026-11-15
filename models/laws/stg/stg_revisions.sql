@@ -1,18 +1,9 @@
-{# 法令履歴一覧取得 API の応答 (data/revisions/revisions.jsonl) を、1 行が 1 法令履歴の表にする。
+{# 法令履歴の属性を取り出して型付けする。
    法令履歴は、新規制定・改正・廃止のたびにできる法令のその時点の版 #}
-
-with source as (
-    select law_info.law_id, unnest(revisions) as revision
-    from read_json(
-        'data/revisions/revisions.jsonl',
-        format = 'newline_delimited',
-        maximum_object_size = 268435456
-    )
-)
 
 select
     revision.law_revision_id,
-    law_id,
+    law_info.law_id,
     revision.law_type,
     revision.law_title,
     revision.law_title_kana,
@@ -33,4 +24,4 @@ select
     revision.remain_in_force,
     revision.current_revision_status,
     cast(revision.updated as timestamptz) as updated_at
-from source
+from {{ ref('raw_revisions') }}

@@ -1,0 +1,4 @@
+schema: laws
+name: raw_articles
+description: 法令本文を条ごとに分けた行（取得したままの形）
+annotations: { queria: { published: false } }
