@@ -13,6 +13,7 @@ clean-targets:
 models:
   e_gov:
     +database: e_gov
+    +materialized: table
     laws:
       raw:
         +materialized: table
