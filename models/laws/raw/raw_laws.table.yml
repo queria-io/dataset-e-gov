@@ -1,4 +1,0 @@
-schema: laws
-name: raw_laws
-description: 法令一覧取得 API の応答（1 行が 1 法令）（取得したままの形）
-annotations: { queria: { published: false } }

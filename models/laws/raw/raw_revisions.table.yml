@@ -1,4 +1,0 @@
-schema: laws
-name: raw_revisions
-description: 法令履歴一覧取得 API の応答（1 行が 1 法令履歴）（取得したままの形）
-annotations: { queria: { published: false } }
