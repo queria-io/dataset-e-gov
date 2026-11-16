@@ -1,5 +1,6 @@
-schema: laws
-name: articles
+---
+$schema: https://queria.io/schemas/table/v1.json
+table: laws.articles
 title: 法令本文（条）
 description: |-
   法令の本文を条ごとに分けたテーブルです。1 行が 1 条で、本則と附則の両方を含みます。
@@ -47,3 +48,4 @@ fields:
   - name: source_sha256
     title: 元のファイルの SHA-256
     description: この行を読んだファイルの SHA-256 です。source_file の sha256 に当たります
+---
