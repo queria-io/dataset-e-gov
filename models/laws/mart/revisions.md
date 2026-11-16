@@ -1,5 +1,6 @@
-schema: laws
-name: revisions
+---
+$schema: https://queria.io/schemas/table/v1.json
+table: laws.revisions
 title: 法令の改正履歴
 description: |-
   法令ごとの改正の履歴です。1 行が 1 法令履歴で、新規制定・改正・廃止のたびに行ができます。
@@ -62,3 +63,4 @@ fields:
     description: CurrentEnforced（現行）・UnEnforced（未施行）・PreviousEnforced（過去の履歴）・Repeal（廃止）
   - name: updated_at
     title: 更新日時
+---

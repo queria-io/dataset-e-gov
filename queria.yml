@@ -1,5 +1,4 @@
-# この dataset.yml は fdl commit が読む（FDL の dataset.json を YAML で書いたもの）。
-# 表の説明は models/ の *.table.yml に書く。表と列の型・NULL・行数は fdl commit がカタログから埋める。
+$schema: https://queria.io/schemas/dataset/v1.json
 name: e_gov
 title: e-Gov
 description: |-
@@ -22,7 +21,6 @@ keywords:
   - デジタル庁
 homepage: https://github.com/queria-io/dataset-e-gov
 language: ja
-
 licenses:
   - JP-PDL-1.0
 
@@ -41,12 +39,9 @@ contributors:
 
 spatial_coverage: [JP]
 update_frequency: weekly
-
 schemas:
   - name: laws
     title: 法令
 
-annotations:
-  queria:
-    themes: [government_finance]
-    cover: ⚖️
+themes: [government_finance]
+cover: ⚖️

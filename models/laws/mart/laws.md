@@ -1,5 +1,6 @@
-schema: laws
-name: laws
+---
+$schema: https://queria.io/schemas/table/v1.json
+table: laws.laws
 title: 法令一覧
 description: |-
   e-Gov 法令検索に収録されている法令の一覧です。1 行が 1 法令で、廃止・失効した法令も含みます。
@@ -66,3 +67,4 @@ fields:
   - name: updated_at
     title: 更新日時
     description: e-Gov 法令検索でこの法令履歴のデータを更新した日時
+---
