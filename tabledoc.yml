@@ -7,6 +7,7 @@ description: |-
   法令（laws）は、憲法・法律・政令・勅令・府省令・規則の一覧（laws.laws）、法令ごとの改正の履歴（laws.revisions）、本文を条ごとに分けたテーブル（laws.articles）です。廃止・失効した法令と、施行日が来ていない改正も含みます。法令 ID と法令履歴 ID で 3 つのテーブルを結合できます。毎週、法令 API と XML 一括ダウンロードから最新のデータを取得します。
 
   出典：e-Gov 法令検索（デジタル庁）（https://laws.e-gov.go.jp/）を加工して作成
+image: cover.png
 topics:
   - 法令
   - 法律
