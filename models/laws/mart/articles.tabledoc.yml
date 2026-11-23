@@ -1,6 +1,4 @@
----
-$schema: https://queria.io/schemas/table/v1.json
-table: laws.articles
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
 title: 法令本文（条）
 description: |-
   法令の本文を条ごとに分けたテーブルです。1 行が 1 条で、本則と附則の両方を含みます。
@@ -12,9 +10,8 @@ description: |-
   - 現行の本文だけを使うときは laws の law_revision_id と結合します
   - url で、e-Gov 法令検索のその法令履歴のページをその条の位置で開けます
 primary_key: [law_revision_id, position]
-sources:
-  - path: https://laws.e-gov.go.jp/bulkdownload/
-fields:
+sources: [bulkdownload]
+columns:
   - name: law_revision_id
     title: 法令履歴 ID
   - name: law_id
@@ -48,4 +45,3 @@ fields:
   - name: source_sha256
     title: 元のファイルの SHA-256
     description: この行を読んだファイルの SHA-256 です。source_file の sha256 に当たります
----

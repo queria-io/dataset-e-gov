@@ -1,6 +1,4 @@
----
-$schema: https://queria.io/schemas/table/v1.json
-table: laws.revisions
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
 title: 法令の改正履歴
 description: |-
   法令ごとの改正の履歴です。1 行が 1 法令履歴で、新規制定・改正・廃止のたびに行ができます。
@@ -9,9 +7,8 @@ description: |-
   - どの改正法令でいつ改正されたかは amendment_law_id・amendment_law_num と amendment_enforcement_date で判定できます。改正法令の行も laws にあり、law_id で結合できます
   - 改正の区分は、amendment_type が 1 かつ mission が New なら新規制定、mission が Partial なら一部改正、amendment_type が 8 か repeal_status が None 以外なら廃止です
 primary_key: [law_revision_id]
-sources:
-  - path: https://laws.e-gov.go.jp/api/2/swagger-ui
-fields:
+sources: [swagger-ui]
+columns:
   - name: law_revision_id
     title: 法令履歴 ID
     description: <法令 ID>_<施行日 YYYYMMDD>_<改正法令の法令 ID> の形。新規制定のときは改正法令の部分が 0 になる
@@ -63,4 +60,3 @@ fields:
     description: CurrentEnforced（現行）・UnEnforced（未施行）・PreviousEnforced（過去の履歴）・Repeal（廃止）
   - name: updated_at
     title: 更新日時
----
