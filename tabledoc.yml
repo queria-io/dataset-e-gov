@@ -28,18 +28,18 @@ licenses:
 sources:
   - id: swagger-ui
     title: e-Gov 法令 API Version 2
-    path: https://laws.e-gov.go.jp/api/2/swagger-ui
+    url: https://laws.e-gov.go.jp/api/2/swagger-ui
   - id: bulkdownload
     title: e-Gov 法令検索 XML 一括ダウンロード
-    path: https://laws.e-gov.go.jp/bulkdownload/
+    url: https://laws.e-gov.go.jp/bulkdownload/
   - id: terms
     title: e-Gov 法令検索 利用規約
-    path: https://laws.e-gov.go.jp/terms/
+    url: https://laws.e-gov.go.jp/terms/
 
 contributors:
   - id: digital
     title: デジタル庁
-    path: https://www.digital.go.jp/
+    url: https://www.digital.go.jp/
     roles: [rightsHolder]
 
 spatial_coverage: [JP]
