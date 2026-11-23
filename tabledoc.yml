@@ -46,4 +46,3 @@ update_frequency: weekly
 schemas:
   - name: laws
     title: 法令
-
