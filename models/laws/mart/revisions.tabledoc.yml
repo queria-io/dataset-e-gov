@@ -50,6 +50,7 @@ columns:
   - name: mission
     title: 改正の区分
     description: New（新規制定・被改正）・Partial（一部改正）
+    dimension: categorical
   - name: repeal_status
     title: 廃止の状態
     description: None・Repeal（廃止）・Expire（失効）・LossOfEffectiveness（実効性喪失）
