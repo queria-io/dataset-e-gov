@@ -16,6 +16,7 @@ columns:
     title: 法令 ID
   - name: law_type
     title: 法令種別
+    dimension: categorical
   - name: law_title
     title: 法令名
     description: この法令履歴の時点の法令名
@@ -25,6 +26,7 @@ columns:
     title: 略称
   - name: category
     title: 分類
+    dimension: categorical
   - name: amendment_promulgate_date
     title: 改正法令の公布日
   - name: amendment_enforcement_date
@@ -44,12 +46,14 @@ columns:
   - name: amendment_type
     title: 改正の種別
     description: 1（新規制定）・3（被改正）・8（廃止）など。法令 API の amendment_type の値
+    dimension: categorical
   - name: mission
     title: 改正の区分
     description: New（新規制定・被改正）・Partial（一部改正）
   - name: repeal_status
     title: 廃止の状態
     description: None・Repeal（廃止）・Expire（失効）・LossOfEffectiveness（実効性喪失）
+    dimension: categorical
   - name: repeal_date
     title: 廃止日
   - name: remain_in_force
@@ -58,5 +62,6 @@ columns:
   - name: current_revision_status
     title: 法令履歴の状態
     description: CurrentEnforced（現行）・UnEnforced（未施行）・PreviousEnforced（過去の履歴）・Repeal（廃止）
+    dimension: categorical
   - name: updated_at
     title: 更新日時

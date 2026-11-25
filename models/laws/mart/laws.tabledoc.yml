@@ -18,6 +18,7 @@ columns:
   - name: law_type
     title: 法令種別
     description: Constitution（憲法）・Act（法律）・CabinetOrder（政令）・ImperialOrder（勅令）・MinisterialOrdinance（府省令）・Rule（規則）。法律と政令の両方の性格を持つ法令は Act,CabinetOrder のように並ぶ
+    dimension: categorical
   - name: law_num_era
     title: 法令番号の元号
     description: Meiji・Taisho・Showa・Heisei・Reiwa
@@ -40,6 +41,7 @@ columns:
   - name: category
     title: 分類
     description: e-Gov 法令検索の事項別分類（憲法・刑事・国税・厚生 など 50 分類）
+    dimension: categorical
   - name: law_revision_id
     title: 法令履歴 ID
     description: 取得した日の時点で施行されている法令履歴。laws.revisions と結合できる
@@ -56,11 +58,13 @@ columns:
   - name: repeal_status
     title: 廃止の状態
     description: None（廃止されていない）・Repeal（廃止）・Expire（失効）・LossOfEffectiveness（実効性喪失）
+    dimension: categorical
   - name: repeal_date
     title: 廃止日
   - name: current_revision_status
     title: 法令履歴の状態
     description: CurrentEnforced（現行）・UnEnforced（未施行）・PreviousEnforced（過去の履歴）・Repeal（廃止）
+    dimension: categorical
   - name: updated_at
     title: 更新日時
     description: e-Gov 法令検索でこの法令履歴のデータを更新した日時

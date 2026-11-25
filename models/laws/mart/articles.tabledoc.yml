@@ -22,6 +22,7 @@ columns:
   - name: provision
     title: 本則・附則
     description: main（本則）・suppl（附則）
+    dimension: categorical
   - name: amend_law_num
     title: 附則の改正法令番号
     description: 附則が、どの改正法令で加わったものか。原始附則は NULL
